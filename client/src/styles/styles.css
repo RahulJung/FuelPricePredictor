@@ -1,1 +1,27 @@
-body {background-color: red;}
+App {
+    text-align: center;
+}
+form {
+    text-align: center;
+    
+    color: black
+    
+}
+
+input[type=submit]{
+    background-color: cornflowerblue;
+}
+
+input{
+    position: relative;
+    align-content: center;
+    text-align: center;
+}
+
+label {
+    
+    width: 6em;
+    margin-right: .5em;
+    padding-top: 1.5em;
+  }
+

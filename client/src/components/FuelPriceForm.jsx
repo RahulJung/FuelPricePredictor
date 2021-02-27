@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import DatePicker from 'react-datepicker'
 
 import 'react-datepicker/dist/react-datepicker.css'
+import '../styles/styles.css'
 
 
 const FuelPriceForm = () => {
@@ -9,23 +10,34 @@ const FuelPriceForm = () => {
   const [selectedDate, setSelectedDate] = useState(null)
 
   return (
-    <form>
+    <form className='form'>
       <div>
-        <label>Number of Gallons Requested? (required) </label>
-        <input></input>
+        <label>Number of Gallons Requested? (required)</label>
+        <input type='number' placeholder='Enter Number of Gallons.'></input>
+        
       </div>
+      
       <div>
         <label>Delivery Address</label>
-        <input></input>
+        <input type="text" placeholder='Address comes from profile.' />
+      </div>
+      
+     
+      
+        <DatePicker 
+        selected={selectedDate}
+        onChange={date => setSelectedDate(date)}
+        placeholderText="Select Delivery Date"
+        />
+     
+     <div>
+       <label>Suggested Price=</label>
       </div>
      <div>
-        <DatePicker 
-        //selected={selectedDate}
-        //onChange={date => setSelectedDate(date)}
-        />
-     </div>
-     <div>Suggested Price=</div>
-     <div>Total Amount=</div>
+       <label>Total Amount= </label>
+      </div>
+
+      <input type='submit' value='Get Price' />
     </form>
     
 
