@@ -1,3 +1,5 @@
+import Axios from "axios";
+import e from "cors";
 import React from "react";
 import Register from "./Register.jsx";
 
@@ -5,18 +7,44 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      userName: "",
+      password: "",
       isRegistered: false,
     };
     this.handleRegister = this.handleRegister.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
+    this.getUser = this.getUser.bind(this);
   }
 
-  handleRegister() {
+  handleLogin(e) {
+    this.setState({
+      userName: e.target.value,
+      password: e.target.value,
+    });
+  }
+
+  handleRegister(e) {
     this.setState({
       isRegistered: true,
     });
   }
 
+  getUser(e) {
+    e.preventDefault();
+    Axios.post("/login", {
+      userName: this.state.userName,
+      password: this.state.userName,
+    })
+      .then((res) => {
+        console.log("Logged In");
+      })
+      .catch((err) => {
+        console.log("Error loggin user");
+      });
+  }
+
   render() {
+    console.log("state", this.state);
     if (!this.state.isRegistered) {
       return (
         <form>
@@ -29,7 +57,8 @@ class Login extends React.Component {
                   name="userName"
                   placeholder="Username"
                   value={this.userName}
-                  onChange={this.changeHandler}
+                  onChange={this.handleLogin}
+                  required
                 />
               </div>
               <div className="pwd">
@@ -39,12 +68,11 @@ class Login extends React.Component {
                   name="password"
                   placeholder="Password"
                   value={this.password}
-                  onChange={this.changeHandler}
+                  onChange={this.handleLogin}
                   required
                 ></input>
-                <button>Login</button>
+                <button onClick={this.getUser}>Login</button>
               </div>
-
               <button className="reviewBtn" onClick={this.handleRegister}>
                 Register
               </button>
