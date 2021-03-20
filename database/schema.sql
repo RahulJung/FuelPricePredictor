@@ -5,13 +5,15 @@ CREATE DATABASE fuelpredictor;
 USE fuelpredictor;
 
 CREATE TABLE userLogin (
-  id varchar(100) NOT NULL,
+  id int NOT NULL AUTO_INCREMENT,
   username varchar(50) DEFAULT NULL,
-  password varchar(1000) DEFAULT NULL
+  pwd varchar(1000) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 );
 
 CREATE TABLE register (
-  id varchar(100) NOT NULL,
+  id int NOT NULL AUTO_INCREMENT,
   username varchar(50) DEFAULT NULL,
-  password varchar(1000) DEFAULT NULL
+  pwd varchar(1000) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 );
