@@ -10,7 +10,7 @@ CREATE TABLE userLogin (
   password varchar(1000) DEFAULT NULL
 );
 
-CREATE TABLE userPassword (
+CREATE TABLE register (
   id varchar(100) NOT NULL,
   username varchar(50) DEFAULT NULL,
   password varchar(1000) DEFAULT NULL
