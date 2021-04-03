@@ -22,8 +22,12 @@ app.post("/login", (req, res) => {
     if (err) {
       console.log("Error getting data from server");
       res.sendStatus(500);
-    } else {
+    }
+    if (data) {
       res.send(data);
+      res.sendStatus(200);
+    } else {
+      res.send("Wrong Username/Password Combination");
     }
   });
 });
@@ -34,8 +38,11 @@ app.post("/register", (req, res) => {
     if (err) {
       console.log("Error posting data from server");
       res.sendStatus(500);
-    } else {
+    }
+    if (data) {
       res.sendStatus(200);
+    } else {
+      res.send("Wrong Username/Password Combination");
     }
   });
 });
