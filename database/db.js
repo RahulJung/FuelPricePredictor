@@ -11,6 +11,7 @@ connection.connect((err) => {
   }
 });
 
+// Query for log in
 const getUserInfo = (username, pwd, callback) => {
   connection.query(
     "SELECT * FROM reviews WHERE username=? AND pwd=?",
@@ -26,6 +27,7 @@ const getUserInfo = (username, pwd, callback) => {
   );
 };
 
+//Query for register
 const registerUser = (username, password, callback) => {
   connection.query(
     `INSERT INTO register (username, pwd) VALUES ('${username}', '${password}')`,
