@@ -9,6 +9,10 @@ const app = express();
 app.use(express.static(path.join(__dirname, "../client/dist")));
 app.use(express.json());
 
+const {
+  userProfile,
+} = require("../database/db");
+
 // Example of a get request
 app.get("/", (req, res) => {
   res.send("Hello from the server!!!");
@@ -16,7 +20,7 @@ app.get("/", (req, res) => {
 
 // route to client profile
 app.post("/profile", (req, res) => {
-  getUserInfo(
+  userProfile(
     req.body.name,
     req.body.add1,
     req.body.add2,
