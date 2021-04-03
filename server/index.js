@@ -2,7 +2,12 @@ const express = require("express");
 const path = require("path");
 const axios = require("axios");
 const cors = require("cors");
-const { getUserInfo, registerUser } = require("../database/db");
+const {
+  getUserInfo,
+  registerUser,
+  postFuelForm,
+  userProfile,
+} = require("../database/db");
 
 const port = 8080;
 const app = express();
@@ -49,7 +54,7 @@ app.post("/register", (req, res) => {
 
 // route to client profile
 app.post("/profile", (req, res) => {
-  getUserInfo(
+  userProfile(
     req.body.name,
     req.body.add1,
     req.body.add2,
@@ -69,14 +74,19 @@ app.post("/profile", (req, res) => {
 
 // route to fuel price form
 app.post("/fuelForm", (req, res) => {
-  getUserInfo(req.body.gallon, req.body.address, req.body.date, (err, data) => {
-    if (err) {
-      console.log("Error posting data from server");
-      res.sendStatus(500);
-    } else {
-      res.send(data);
+  postFuelForm(
+    req.body.gallon,
+    req.body.address,
+    req.body.date,
+    (err, data) => {
+      if (err) {
+        console.log("Error posting data from server");
+        res.sendStatus(500);
+      } else {
+        res.send(data);
+      }
     }
-  });
+  );
 });
 
 // Listen to port 8080
