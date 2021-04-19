@@ -49,4 +49,33 @@ const getUserInfo = (username, pwd, callback) => {
   );
 };
 
-module.exports = { getUserInfo, registerUser };
+const userProfile = (name, add1, add2, city, state, zip, userId, callback) => {
+  connection.query(
+    `INSERT INTO userInfo (fullname, add1, add2, city, st, zip, userId) VALUES ('${name}', '${add1}', '${add2}', '${city}', '${state}', '${zip}', '${userId}')`,
+    (err, data) => {
+      if (err) {
+        console.log("problem posting user profile form in query");
+        callback(err, null);
+      } else {
+        callback(null, data);
+      }
+    }
+  );
+};
+
+const getProfile = (userId, callback) => {
+  connection.query(
+    "SELECT * FROM userInfo WHERE userId=?",
+    [userId],
+    (err, data) => {
+      if (err) {
+        console.log("problem getting user profile form in query");
+        callback(err, null);
+      } else {
+        callback(null, data);
+      }
+    }
+  );
+};
+
+module.exports = { getUserInfo, registerUser, userProfile, getProfile };

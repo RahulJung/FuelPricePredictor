@@ -1,40 +1,72 @@
-import React, { useState } from "react";
+import React from "react";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "../styles/styles.css";
 
-const FuelPriceForm = () => {
-  const [selectedDate, setSelectedDate] = useState(null);
+class FuelPriceForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      gallons: 0,
+      date: new Date(),
+      suggestedPrice: 0,
+      actualPrice: 0,
+    };
+    this.handleDateChange = this.handleDateChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
 
-  return (
-    <form className="form">
-      <div>
-        <label>Number of Gallons Requested? (required)</label>
-        <input type="number" placeholder="Enter Number of Gallons."></input>
-      </div>
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  }
 
-      <div>
-        <label>Delivery Address</label>
-        <input type="text" placeholder="Address comes from profile." />
-      </div>
+  handleDateChange(date) {
+    this.setState({
+      date: date,
+    });
+  }
 
-      <DatePicker
-        selected={selectedDate}
-        onChange={(date) => setSelectedDate(date)}
-        placeholderText="Select Delivery Date"
-      />
+  render() {
+    console.log(this.state);
+    return (
+      <form className="form">
+        <div>
+          <label>Number of Gallons Requested?</label>
+          <input
+            type="number"
+            name="gallons"
+            placeholder="Enter Number of Gallons."
+            onChange={this.handleChange}
+          ></input>
+        </div>
 
-      <div>
-        <label>Suggested Price=</label>
-      </div>
-      <div>
-        <label>Total Amount= </label>
-      </div>
+        <div>
+          <label>Delivery Address</label>
+          <input type="text" placeholder="Address comes from profile." />
+        </div>
 
-      <input type="submit" value="Get Price" />
-    </form>
-  );
-};
+        <DatePicker
+          selected={this.state.date}
+          onChange={this.handleDateChange}
+          name="startDate"
+          dateFormat="MM/dd/yyyy"
+          placeholderText="Select Delivery Date"
+        />
+
+        <div>
+          <label>Suggested Price=</label>
+        </div>
+        <div>
+          <label>Total Amount= </label>
+        </div>
+
+        <input type="submit" value="Get Price" />
+      </form>
+    );
+  }
+}
 
 export default FuelPriceForm;

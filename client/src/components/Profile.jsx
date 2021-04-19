@@ -14,14 +14,30 @@ class Profile extends React.Component {
       state: "",
       zip: "",
       isComplete: false,
+      data: [],
     };
     this.handleClick = this.handleClick.bind(this);
     this.addUserData = this.addUserData.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.getUserInfo = this.getUserInfo.bind(this);
   }
 
-  handleClick(e) {
-    e.preventDefault();
+  componentDidMount() {
+    this.getUserInfo(this.props.id);
+  }
+
+  getUserInfo(id = this.props.id) {
+    Axios.get(`/userInfo/${id}`)
+      .then((res) => {
+        this.setState({
+          data: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log("Error getting dataa");
+      });
+  }
+  handleClick() {
     this.setState({
       isComplete: true,
     });
@@ -42,12 +58,13 @@ class Profile extends React.Component {
       city: this.state.city,
       state: this.state.state,
       zip: this.state.zip,
+      userId: this.props.id,
     })
       .then(() => {
-        this.handleClick();
+        console.log("Data Posted");
       })
       .then(() => {
-        console.log("Data Posted");
+        this.handleClick();
       })
       .catch((err) => {
         console.log("Error posting profile");
@@ -62,8 +79,8 @@ class Profile extends React.Component {
   }
 
   render() {
-    console.log(this.state);
-    if (!this.state.isComplete) {
+    console.log("this is idererereasdasd", this.state.data);
+    if (!this.state.isComplete && this.state.data.length <= 0) {
       return (
         <div>
           <form>

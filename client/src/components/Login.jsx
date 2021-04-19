@@ -10,7 +10,7 @@ class Login extends React.Component {
       name: "",
       password: "",
       isRegistered: false,
-      data: [],
+      data: 0,
       loggedIn: false,
     };
     this.handleChange = this.handleChange.bind(this);
@@ -49,7 +49,7 @@ class Login extends React.Component {
   }
 
   render() {
-    console.log(this.state);
+    // console.log("This is data", this.state.data);
     if (!this.state.isRegistered && !this.state.loggedIn) {
       return (
         <div>
@@ -81,7 +81,7 @@ class Login extends React.Component {
     if (this.state.loggedIn) {
       return (
         <div>
-          <Profile />
+          <Profile id={this.state.data} />
         </div>
       );
     } else {

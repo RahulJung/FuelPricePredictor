@@ -4,12 +4,13 @@ const axios = require("axios");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
-const bodyParser = require("body-parser");
+// const bodyParser = require("body-parser");
 const {
   getUserInfo,
   registerUser,
   postFuelForm,
   userProfile,
+  getProfile,
 } = require("../database/db");
 const { createSecretKey } = require("crypto");
 
@@ -34,7 +35,7 @@ app.post("/login", (req, res) => {
     if (data.length > 0) {
       bcrypt.compare(req.body.password, data[0].pwd, (err, response) => {
         if (response) {
-          res.send({ data: data, logged: true });
+          res.send({ data: data[0].userId, logged: true });
         } else {
           res.send({ message: "Wrong username or password" });
         }
@@ -65,23 +66,35 @@ app.post("/register", (req, res) => {
 
 // route to client profile
 app.post("/profile", (req, res) => {
-  console.log(req.body);
-  // userProfile(
-  //   req.body.name,
-  //   req.body.address1,
-  //   req.body.address2,
-  //   req.body.city,
-  //   re1.body.state,
-  //   re1.body.zip,
-  //   (err, data) => {
-  //     if (err) {
-  //       console.log("Error posting data from server");
-  //       res.sendStatus(500);
-  //     } else {
-  //       res.sendStatus(200);
-  //     }
-  //   }
-  // );
+  userProfile(
+    req.body.name,
+    req.body.address1,
+    req.body.address2,
+    req.body.city,
+    req.body.state,
+    req.body.zip,
+    req.body.userId,
+    (err, data) => {
+      if (err) {
+        console.log("Error posting data from server");
+        res.sendStatus(500);
+      } else {
+        res.sendStatus(200);
+      }
+    }
+  );
+});
+
+app.get("/userInfo/:id", (req, res) => {
+  console.log("triggered", req.params.id);
+  getProfile(req.params.id, (err, data) => {
+    if (err) {
+      console.log("Error getting user profile in server");
+    } else {
+      console.log(data);
+      res.send(data);
+    }
+  });
 });
 
 // route to fuel price form

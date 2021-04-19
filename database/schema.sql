@@ -4,20 +4,23 @@ CREATE DATABASE fuelpredictor;
 
 USE fuelpredictor;
 
+
+CREATE TABLE register (
+  userId int NOT NULL AUTO_INCREMENT,
+  username varchar(50) DEFAULT NULL,
+  pwd varchar(1000) DEFAULT NULL,
+  PRIMARY KEY (`userId`)
+);
+
 CREATE TABLE userInfo (
-  id int NOT NULL AUTO_INCREMENT,
+  infoId int NOT NULL AUTO_INCREMENT,
   fullname varchar(100) DEFAULT NULL,
   add1 varchar(100) DEFAULT NULL,
   add2 varchar(100) DEFAULT NULL,
   city varchar(100) DEFAULT NULL,
-  state varchar(100) DEFAULT NULL,
+  st varchar(100) DEFAULT NULL,
   zip varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-);
-
-CREATE TABLE register (
-  id int NOT NULL AUTO_INCREMENT,
-  username varchar(50) DEFAULT NULL,
-  pwd varchar(1000) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  userId int,
+  PRIMARY KEY (`infoId`),
+  FOREIGN KEY (`userId`) REFERENCES register(`userId`)
 );
