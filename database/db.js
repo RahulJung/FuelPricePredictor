@@ -1,6 +1,7 @@
 const mysql = require("mysql");
 const mysqlConfig = require("./config.js");
-
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 const connection = mysql.createConnection(mysqlConfig);
 
 connection.connect((err) => {
@@ -11,29 +12,35 @@ connection.connect((err) => {
   }
 });
 
+//Query for register
+const registerUser = (name, password, callback) => {
+  bcrypt.hash(password, saltRounds, (err, hash) => {
+    if (err) {
+      console.log("Error hashing password");
+    }
+    connection.query(
+      `INSERT INTO register (username, pwd) VALUES ('${name}', '${hash}')`,
+      (err, data) => {
+        if (err) {
+          console.log("problem posting reviews in query");
+          callback(err, null);
+        } else {
+          callback(null, data);
+          console.log("Successfully posted data");
+        }
+      }
+    );
+  });
+};
+
 // Query for log in
 const getUserInfo = (username, pwd, callback) => {
   connection.query(
-    "SELECT * FROM reviews WHERE username=? AND pwd=?",
-    [username, pwd],
+    "SELECT * FROM register WHERE username=?",
+    [username],
     (err, data) => {
       if (err) {
         console.log("problem getting all reviews in query");
-        callback(err, null);
-      } else {
-        callback(null, data);
-      }
-    }
-  );
-};
-
-//Query for register
-const registerUser = (username, password, callback) => {
-  connection.query(
-    `INSERT INTO register (username, pwd) VALUES ('${username}', '${password}')`,
-    (err, data) => {
-      if (err) {
-        console.log("problem posting reviews in query");
         callback(err, null);
       } else {
         callback(null, data);

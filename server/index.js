@@ -2,6 +2,8 @@ const express = require("express");
 const path = require("path");
 const axios = require("axios");
 const cors = require("cors");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 const {
   getUserInfo,
   registerUser,
@@ -23,23 +25,30 @@ app.get("/", (req, res) => {
 
 // route to user log in
 app.post("/login", (req, res) => {
-  getUserInfo(req.body.userName, req.body.password, (err, data) => {
+  getUserInfo(req.body.name, req.body.password, (err, data) => {
     if (err) {
-      console.log("Error getting data from server");
       res.sendStatus(500);
     }
-    if (data) {
-      res.send(data);
-      res.sendStatus(200);
+    if (data.length > 0) {
+      bcrypt.compare(req.body.password, data[0].pwd, (err, response) => {
+        if (response) {
+          res.send({ loggedIN: true, data: data });
+        } else {
+          res.send({ message: "Wrong username or password" });
+        }
+      });
     } else {
-      res.send("Wrong Username/Password Combination");
+      res.send({ message: "User does not exist" });
     }
   });
 });
 
 // route to user regestration
 app.post("/register", (req, res) => {
-  registerUser(req.body.userName, req.body.password, (err, data) => {
+  let name = req.body.name;
+  let password = req.body.password;
+
+  registerUser(name, password, (err, data) => {
     if (err) {
       console.log("Error posting data from server");
       res.sendStatus(500);

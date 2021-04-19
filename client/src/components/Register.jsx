@@ -1,93 +1,91 @@
-import Axios from "axios";
 import React from "react";
+import Axios from "axios";
 import Login from "./Login.jsx";
 
 class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userName: "",
+      name: "",
       password: "",
+      newPassword: "",
       isLoggedin: false,
     };
-    this.handleLogin = this.handleLogin.bind(this);
-    this.handleRegister = this.handleRegister.bind(this);
-    this.registerUser = this.registerUser.bind(this);
+    this.handleLoggedin = this.handleLoggedin.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleRegister(e) {
+  handleChange(e) {
     this.setState({
-      userName: e.target.value,
-      password: e.target.value,
+      [e.target.name]: e.target.value,
     });
   }
 
-  handleLogin(e) {
+  handleSubmit(event) {
+    event.preventDefault();
+    Axios.post("/register", {
+      name: this.state.name,
+      password: this.state.password,
+    })
+      .then((res) => {
+        console.log("User Registeres");
+      })
+      .then(() => {
+        this.setState({
+          name: "",
+          password: "",
+          newPassword: "",
+        });
+      })
+      .catch((err) => {
+        console.log("Error Registering user");
+      });
+  }
+
+  handleLoggedin(e) {
+    e.preventDefault();
     this.setState({
       isLoggedin: true,
     });
   }
 
-  registerUser() {
-    Axios.post("http://localhost:8080/register", {
-      userName: this.state.userName,
-      password: this.state.password,
-    })
-      .then(() => {
-        console.log("User Registered");
-      })
-      .catch((err) => {
-        console.log("Error in user regestration", err);
-      });
-  }
-
   render() {
-    console.log("this is state", this.state);
     if (!this.state.isLoggedin) {
       return (
-        <form onSubmit={this.handleLogin}>
-          <div className="form">
-            <h2>Register User</h2>
-            <div className="innerForm">
-              <div className="userName">
-                <label>User Name</label>
-                <input
-                  name="userName"
-                  placeholder="Username"
-                  value={this.userName}
-                  onChange={this.handleRegister}
-                />
-              </div>
-              <div className="pwd">
-                <label>Password</label>
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  value={this.password}
-                  onChange={this.handleRegister}
-                  required
-                ></input>
-              </div>
-              <div className="pwd">
-                <label>Confirm Password</label>
-                <input
-                  type="new-password"
-                  name="new-password"
-                  placeholder="Re-enter Password"
-                  value={this.password}
-                  onChange={this.changeHandler}
-                  required
-                ></input>
-                <button type="submit">Register</button>
-              </div>
-
-              <button type="button" className="reviewBtn">
-                Login
-              </button>
+        <div>
+          <form onSubmit={this.handleSubmit}>
+            <div>
+              <label>Name:</label>
+              <input
+                type="text"
+                name="name"
+                value={this.state.name}
+                onChange={this.handleChange}
+              ></input>
             </div>
-          </div>
-        </form>
+            <div>
+              <label>Password</label>
+              <input
+                type="password"
+                name="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div>
+              <label>Password</label>
+              <input
+                type="password"
+                name="newPassword"
+                value={this.state.newPassword}
+                onChange={this.handleChange}
+              />
+            </div>
+            <input type="submit" value="submit"></input>
+            <button onClick={this.handleLoggedin}>Login</button>
+          </form>
+        </div>
       );
     } else {
       return (
