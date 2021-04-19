@@ -1,6 +1,7 @@
 import React from "react";
 import Axios from "axios";
 import Register from "./Register.jsx";
+import Profile from "./Profile.jsx";
 
 class Login extends React.Component {
   constructor(props) {
@@ -9,11 +10,14 @@ class Login extends React.Component {
       name: "",
       password: "",
       isRegistered: false,
+      data: [],
+      loggedIn: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleRegister = this.handleRegister.bind(this);
   }
+
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value,
@@ -34,12 +38,9 @@ class Login extends React.Component {
       password: this.state.password,
     })
       .then((res) => {
-        console.log(res.data);
-      })
-      .then(() => {
         this.setState({
-          name: "",
-          password: "",
+          data: res.data.data,
+          loggedIn: res.data.logged,
         });
       })
       .catch((err) => {
@@ -48,7 +49,8 @@ class Login extends React.Component {
   }
 
   render() {
-    if (!this.state.isRegistered) {
+    console.log(this.state);
+    if (!this.state.isRegistered && !this.state.loggedIn) {
       return (
         <div>
           <form onSubmit={this.handleSubmit}>
@@ -70,9 +72,16 @@ class Login extends React.Component {
                 onChange={this.handleChange}
               />
             </div>
-            <input type="submit" value="Login"></input>
+            <button>Login</button>
             <button onClick={this.handleRegister}>Register</button>
           </form>
+        </div>
+      );
+    }
+    if (this.state.loggedIn) {
+      return (
+        <div>
+          <Profile />
         </div>
       );
     } else {
