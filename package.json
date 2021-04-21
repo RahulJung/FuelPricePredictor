@@ -23,15 +23,22 @@
     "@babel/preset-env": "^7.12.17",
     "@babel/preset-react": "^7.12.13",
     "babel-loader": "^8.2.2",
+    "css-loader": "^5.1.0",
+    "style-loader": "^2.0.0",
     "webpack": "^5.23.0",
     "webpack-cli": "^4.5.0"
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
+    "mysql": "^2.18.1",
     "nodemon": "^2.0.7",
     "path": "^0.12.7",
     "react": "^17.0.1",
+    "react-datepicker": "^3.7.0",
     "react-dom": "^17.0.1"
   }
 }

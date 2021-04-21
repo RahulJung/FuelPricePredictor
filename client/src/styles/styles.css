@@ -1,0 +1,245 @@
+body {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 16px;
+  background-color: #f2f2f2;
+}
+.main {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 6px;
+  border: 1px solid #ebebeb;
+  width: 356px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.04);
+  padding: 24px;
+  margin: auto;
+  margin-top: 10%;
+}
+
+.form1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 0 0 6px 6px;
+  border: 1px solid #ebebeb;
+  width: 356px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.04);
+  padding: 24px;
+  margin: auto;
+  /* margin-top: 10%; */
+}
+
+.form2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 6px;
+  border: 1px solid #ebebeb;
+  /* width: 356px; */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.04);
+  padding: 24px;
+  margin: auto 25%;
+  margin-top: 5%;
+}
+
+.address {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.innerForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+h2 {
+  font-size: 24px;
+  font-weight: 800;
+  text-align: center;
+  color: #16191c;
+  margin-top: 12px;
+}
+
+.userName {
+  display: flex;
+  flex-direction: column;
+  margin: 24px auto 0;
+  width: unset;
+}
+
+.user {
+  display: flex;
+  flex-direction: column;
+  margin: 18px auto 0;
+  width: unset;
+}
+
+.user1 {
+  display: flex;
+  flex-direction: column;
+  margin: 18px 25px 0;
+  width: 75%;
+}
+
+.user5 {
+  display: flex;
+  flex-direction: column;
+  margin: 18px 25px 0;
+  width: unset;
+  /* background: #ffffff; */
+}
+
+.pwd {
+  display: flex;
+  flex-direction: column;
+  margin: 24px auto 0;
+  width: unset;
+}
+
+.btn {
+  display: flex;
+  flex-direction: row;
+}
+.reviewBtn {
+  margin: 24px auto 0;
+  width: unset;
+  padding: 11px 24px 10px;
+  font-size: 14px;
+  line-height: 17px;
+  width: auto;
+  background-color: #fffc00;
+  color: #16191c;
+  font-weight: 550;
+  display: block;
+  border-radius: 15px;
+  border-color: transparent;
+}
+
+.reviewBtn1 {
+  /* margin: 24px auto 0; */
+  width: unset;
+  padding: 11px 24px 10px;
+  font-size: 14px;
+  line-height: 17px;
+  width: auto;
+  background-color: #fffc00;
+  color: #16191c;
+  font-weight: 550;
+  display: block;
+  border-radius: 15px;
+  border-color: transparent;
+}
+
+.back {
+  background-color: transparent;
+  color: #16191c;
+  font-weight: 500;
+  padding: 3px 8px 4px 8px;
+  font-size: 12px;
+  line-height: 17px;
+  width: auto;
+  border: 1.5px solid #656b73;
+  /* border-color: black; */
+  border-radius: 12px;
+  margin: auto;
+  background-color: #ffffff;
+}
+
+.links {
+  color: #16191c;
+}
+
+a {
+  text-decoration: none;
+  color: #16191c;
+}
+
+a:hover {
+  text-decoration: #fffc00;
+}
+.Success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 6px;
+  border: 1px solid #ebebeb;
+  width: 356px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.04);
+  padding: 24px;
+  margin: auto;
+  margin-top: 5%;
+}
+
+.header {
+  font-size: 24px;
+  /* font-weight: 800; */
+  text-align: center;
+  color: #16191c;
+  margin-top: 12px;
+}
+
+.wel {
+  text-align: center;
+}
+
+.x {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 6px;
+  border: 1px solid #ebebeb;
+  width: 356px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.04);
+  padding: 24px;
+  margin: auto;
+  margin-top: 5%;
+}
+
+.y {
+  padding: 5px;
+}
+
+.signHeader {
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* background: #ffffff; */
+  border-radius: 6px 6px 0 0;
+  border: 1px solid #ebebeb;
+  width: 356px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.04);
+  padding: 24px;
+  margin: auto;
+  margin-top: 5%;
+}
+
+.log {
+  align-items: center;
+  padding: 24px;
+  margin: auto;
+  font-size: 15px;
+  line-height: 17px;
+}
+
+.message {
+  color: #e1143d;
+  font-size: 12px;
+}
+.head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

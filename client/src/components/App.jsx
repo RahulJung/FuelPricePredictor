@@ -1,12 +1,19 @@
 import React from "react";
+import Axios from "axios";
+import Login from "./Login.jsx";
+import "../styles/styles.css";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
+    this.state = {};
   }
-
   render() {
-    return <div>Hello From React</div>;
+    return (
+      <div>
+        <Login />
+      </div>
+    );
   }
 }
 
