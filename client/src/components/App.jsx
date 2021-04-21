@@ -1,6 +1,7 @@
 import React from "react";
 import Axios from "axios";
 import Login from "./Login.jsx";
+import "../styles/styles.css";
 
 class App extends React.Component {
   constructor() {

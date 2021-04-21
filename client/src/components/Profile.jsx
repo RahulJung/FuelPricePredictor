@@ -61,7 +61,7 @@ class Profile extends React.Component {
       userId: this.props.id,
     })
       .then(() => {
-        console.log("Data Posted");
+        this.getUserInfo(this.props.id);
       })
       .then(() => {
         this.handleClick();
@@ -70,22 +70,29 @@ class Profile extends React.Component {
         console.log("Error posting profile");
       });
   }
+
   //function takes x and returns option tags with value attributue x
   // (x) => <option valu='x'>x</option>
   makeStateOption(_states) {
-    return _states.map((_state) => {
-      return <option value={_state}>{_state}</option>;
+    return _states.map((_state, idx) => {
+      return (
+        <option value={_state} key={idx}>
+          {_state}
+        </option>
+      );
     });
   }
 
   render() {
-    console.log("this is idererereasdasd", this.state.data);
-    if (!this.state.isComplete && this.state.data.length <= 0) {
+    if (this.state.data.length <= 0) {
       return (
         <div>
-          <form>
-            <div className="profile_form">
-              <div className="input_group container-flex">
+          <div className="signHeader">
+            <div>Client Profile Management</div>
+          </div>
+          <form onSubmit={this.addUserData}>
+            <div className="form1">
+              <div className="user">
                 <label>Full name</label>
                 <input
                   type="text"
@@ -96,7 +103,7 @@ class Profile extends React.Component {
                 />
               </div>
 
-              <div className="input_group  container-flex">
+              <div className="user">
                 <label>Address1</label>
                 <input
                   type="text"
@@ -107,7 +114,7 @@ class Profile extends React.Component {
                 />
               </div>
 
-              <div className="input_group container-flex">
+              <div className="user">
                 <label>Address2</label>
                 <input
                   type="text"
@@ -117,7 +124,7 @@ class Profile extends React.Component {
                 />
               </div>
 
-              <div className="input_group container-flex">
+              <div className="user">
                 <label>City</label>
                 <input
                   type="text"
@@ -128,7 +135,7 @@ class Profile extends React.Component {
                 />
               </div>
 
-              <div className="input_group container-flex">
+              <div className="user">
                 <label>State</label>
                 <select
                   name="state"
@@ -145,7 +152,7 @@ class Profile extends React.Component {
 
               {/* more additions go below here */}
 
-              <div className="input_group container-flex">
+              <div className="user">
                 <label>Zipcode</label>
                 <input
                   type="number"
@@ -158,9 +165,14 @@ class Profile extends React.Component {
                 />
               </div>
 
-              <div className="input_group container-flex">
-                <button value="submit" type="submit" onClick={this.addUserData}>
-                  submit
+              <div>
+                <button
+                  className="reviewBtn"
+                  value="submit"
+                  type="submit"
+                  // onClick={this.addUserData}
+                >
+                  Submit
                 </button>
               </div>
             </div>
@@ -171,7 +183,7 @@ class Profile extends React.Component {
     } else {
       return (
         <div>
-          <FuelPriceForm />
+          <FuelPriceForm data={this.state.data} id={this.props.id} />
         </div>
       );
     }

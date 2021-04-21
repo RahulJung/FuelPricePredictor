@@ -12,6 +12,7 @@ class Login extends React.Component {
       isRegistered: false,
       data: 0,
       loggedIn: false,
+      message: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -38,9 +39,11 @@ class Login extends React.Component {
       password: this.state.password,
     })
       .then((res) => {
+        console.log("This is message", res.data.message);
         this.setState({
           data: res.data.data,
           loggedIn: res.data.logged,
+          message: res.data.message,
         });
       })
       .catch((err) => {
@@ -52,29 +55,43 @@ class Login extends React.Component {
     // console.log("This is data", this.state.data);
     if (!this.state.isRegistered && !this.state.loggedIn) {
       return (
-        <div>
-          <form onSubmit={this.handleSubmit}>
-            <div>
-              <label>Name:</label>
-              <input
-                type="text"
-                name="name"
-                value={this.state.name}
-                onChange={this.handleChange}
-              ></input>
+        <div className="main">
+          <div className="form">
+            <h2>Login to GetFuel</h2>
+
+            <div className="innerForm">
+              <form onSubmit={this.handleSubmit}>
+                <div className="userName">
+                  <label>Username: </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={this.state.name}
+                    onChange={this.handleChange}
+                    required
+                  ></input>
+                </div>
+                <div className="pwd">
+                  <label>Password: </label>
+                  <input
+                    type="password"
+                    name="password"
+                    value={this.state.password}
+                    onChange={this.handleChange}
+                    required
+                  />
+                </div>
+                <button className="reviewBtn">Login</button>
+              </form>
             </div>
-            <div>
-              <label>Password</label>
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleChange}
-              />
-            </div>
-            <button>Login</button>
-            <button onClick={this.handleRegister}>Register</button>
-          </form>
+          </div>
+          <div className="log">
+            New to GetFuel?{"    "}
+            <button className="back" onClick={this.handleRegister}>
+              Sign Up
+            </button>
+          </div>
+          <div className="message">{this.state.message}</div>
         </div>
       );
     }

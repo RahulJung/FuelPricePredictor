@@ -10,6 +10,7 @@ class Register extends React.Component {
       password: "",
       newPassword: "",
       isLoggedin: false,
+      message: "",
     };
     this.handleLoggedin = this.handleLoggedin.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -24,23 +25,30 @@ class Register extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    Axios.post("/register", {
-      name: this.state.name,
-      password: this.state.password,
-    })
-      .then((res) => {
-        console.log("User Registeres");
+    if (this.state.password === this.state.newPassword) {
+      Axios.post("/register", {
+        name: this.state.name,
+        password: this.state.password,
       })
-      .then(() => {
-        this.setState({
-          name: "",
-          password: "",
-          newPassword: "",
+        .then((res) => {
+          console.log("User Registeres");
+        })
+        .then(() => {
+          this.setState({
+            name: "",
+            password: "",
+            newPassword: "",
+            message: "Login to your profile",
+          });
+        })
+        .catch((err) => {
+          console.log("Error Registering user");
         });
-      })
-      .catch((err) => {
-        console.log("Error Registering user");
+    } else {
+      this.setState({
+        message: "Password did not match",
       });
+    }
   }
 
   handleLoggedin(e) {
@@ -51,40 +59,59 @@ class Register extends React.Component {
   }
 
   render() {
+    console.log();
     if (!this.state.isLoggedin) {
       return (
         <div>
-          <form onSubmit={this.handleSubmit}>
+          <div>{this.state.message}</div>
+          <div className="signHeader">
+            <div>Already have GetFuel account? </div>
             <div>
-              <label>Name:</label>
-              <input
-                type="text"
-                name="name"
-                value={this.state.name}
-                onChange={this.handleChange}
-              ></input>
+              <button className="back" onClick={this.handleLoggedin}>
+                Login
+              </button>
             </div>
-            <div>
-              <label>Password</label>
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleChange}
-              />
-            </div>
-            <div>
-              <label>Password</label>
-              <input
-                type="password"
-                name="newPassword"
-                value={this.state.newPassword}
-                onChange={this.handleChange}
-              />
-            </div>
-            <input type="submit" value="submit"></input>
-            <button onClick={this.handleLoggedin}>Login</button>
-          </form>
+          </div>
+          <div className="form1">
+            <form onSubmit={this.handleSubmit}>
+              <div>
+                <h3>Sign Up for GetFuel</h3>
+              </div>
+              <div className="userName">
+                <label>Userame:</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={this.state.name}
+                  onChange={this.handleChange}
+                  required
+                ></input>
+              </div>
+              <div className="pwd">
+                <label>Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                  required
+                />
+              </div>
+              <div className="pwd">
+                <label>Password</label>
+                <input
+                  type="password"
+                  name="newPassword"
+                  value={this.state.newPassword}
+                  onChange={this.handleChange}
+                  required
+                />
+              </div>
+              <button className="reviewBtn" type="submit" value="submit">
+                Sign Up & Accept
+              </button>
+            </form>
+          </div>
         </div>
       );
     } else {

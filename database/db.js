@@ -25,8 +25,8 @@ const registerUser = (name, password, callback) => {
           console.log("problem posting reviews in query");
           callback(err, null);
         } else {
-          callback(null, data);
           console.log("Successfully posted data");
+          callback(null, data);
         }
       }
     );
@@ -39,6 +39,7 @@ const getUserInfo = (username, pwd, callback) => {
     "SELECT * FROM register WHERE username=?",
     [username],
     (err, data) => {
+      console.log("Hola");
       if (err) {
         console.log("problem getting all reviews in query");
         callback(err, null);
@@ -78,4 +79,48 @@ const getProfile = (userId, callback) => {
   );
 };
 
-module.exports = { getUserInfo, registerUser, userProfile, getProfile };
+const addQuote = (
+  fullname,
+  userAddress,
+  suggestedPrice,
+  actualPrice,
+  date,
+  gallons,
+  userId,
+  callback
+) => {
+  connection.query(
+    `INSERT INTO priceHistory (fullname, userAddress, suggestedPrice, actualPrice, dated, gallons, userId) VALUES ('${fullname}','${userAddress}','${suggestedPrice}','${actualPrice}','${date}','${gallons}','${userId}')`,
+    (err, data) => {
+      if (err) {
+        console.log("Error un addquote database");
+        callback(err, null);
+      } else {
+        callback(null, data);
+      }
+    }
+  );
+};
+
+const getQuote = (id, callback) => {
+  connection.query(
+    "SELECT * FROM priceHistory WHERE userId = ?",
+    [id],
+    (err, data) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, data);
+      }
+    }
+  );
+};
+
+module.exports = {
+  getUserInfo,
+  registerUser,
+  userProfile,
+  getProfile,
+  addQuote,
+  getQuote,
+};

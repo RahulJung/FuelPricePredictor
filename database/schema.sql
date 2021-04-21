@@ -24,3 +24,16 @@ CREATE TABLE userInfo (
   PRIMARY KEY (`infoId`),
   FOREIGN KEY (`userId`) REFERENCES register(`userId`)
 );
+
+CREATE TABLE priceHistory (
+  infoId int NOT NULL AUTO_INCREMENT,
+  fullname varchar(100) DEFAULT NULL,
+  userAddress varchar(5000) NOT NULL,
+  suggestedPrice DECIMAL(4,2) NOT NULL,
+  actualPrice DECIMAL(4,2) NOT NULL,
+  dated varchar(100) NOT NULL,
+  gallons DECIMAL(4,2) NOT NULL,
+  userId int,
+  PRIMARY KEY (`infoId`),
+  FOREIGN KEY (`userId`) REFERENCES register(`userId`)
+);

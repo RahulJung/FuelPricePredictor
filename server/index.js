@@ -11,6 +11,8 @@ const {
   postFuelForm,
   userProfile,
   getProfile,
+  addQuote,
+  getQuote,
 } = require("../database/db");
 const { createSecretKey } = require("crypto");
 
@@ -86,12 +88,10 @@ app.post("/profile", (req, res) => {
 });
 
 app.get("/userInfo/:id", (req, res) => {
-  console.log("triggered", req.params.id);
   getProfile(req.params.id, (err, data) => {
     if (err) {
       console.log("Error getting user profile in server");
     } else {
-      console.log(data);
       res.send(data);
     }
   });
@@ -112,6 +112,43 @@ app.post("/fuelForm", (req, res) => {
       }
     }
   );
+});
+
+app.post("/addPrice", (req, res) => {
+  let fullname = req.body.fullname;
+  let userAddress = req.body.userAddress;
+  let suggestedPrice = req.body.suggestedPrice;
+  let actualPrice = req.body.actualPrice;
+  let date = req.body.date;
+  let gallons = req.body.gallons;
+  let userId = req.body.userId;
+  addQuote(
+    fullname,
+    userAddress,
+    suggestedPrice,
+    actualPrice,
+    date,
+    gallons,
+    userId,
+    (err, data) => {
+      if (err) {
+        console.log("Error posting date on backend");
+      } else {
+        console.log("server");
+        res.send(data);
+      }
+    }
+  );
+});
+
+app.get("/getQuote/:id", (req, res) => {
+  getQuote(req.params.id, (err, data) => {
+    if (err) {
+      console.log(" Error in getting data in backend");
+    } else {
+      res.send(data);
+    }
+  });
 });
 
 // Listen to port 8080
