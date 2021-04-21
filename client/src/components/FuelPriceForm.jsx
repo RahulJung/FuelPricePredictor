@@ -118,11 +118,29 @@ class FuelPriceForm extends React.Component {
   }
 
   render() {
-    console.log("this is date", this.state.date);
+    console.log("this is date", this.props.data[0]);
     if (this.state.isLoggedin) {
       return (
         <div>
-          <div className="form2">
+          <div className="head">
+            <div>
+              <h2>Welcome {this.props.data[0].fullname}</h2>
+            </div>
+            <div>
+              <button
+                className="reviewBtn1"
+                onClick={() => {
+                  this.setState({ isLoggedin: false });
+                }}
+              >
+                Logout
+              </button>
+            </div>
+          </div>
+          <div className="signHeader">
+            <div>Fuel Quote Form </div>
+          </div>
+          <div className="form1">
             <form onSubmit={this.addPrice}>
               <div className="user">
                 <label>Number of Gallons Requested</label>
@@ -209,14 +227,6 @@ class FuelPriceForm extends React.Component {
                 </button>
               </div>
               <button className="reviewBtn"> Submit </button>
-              <button
-                className="back"
-                onClick={() => {
-                  this.setState({ isLoggedin: false });
-                }}
-              >
-                Logout
-              </button>
             </form>
           </div>
           <UserData data={this.state.data} />

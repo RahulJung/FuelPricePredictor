@@ -7,17 +7,23 @@ class UserData extends React.Component {
 
   render() {
     return (
-      <div>
-        {/* <H3> Fuel Quote History </H3> */}
-        {this.props.data.map((item) => (
-          <div>
-            {item.fullname}
-            Gallons: {item.gallons}
-            Suggested Price: {item.suggestedPrice}
-            {item.userAddress}
-            <div>{item.dated}</div> {item.actualPrice}
-          </div>
-        ))}
+      <div className="main">
+        <ol>
+          {/* <H3> Fuel Quote History </H3> */}
+          {this.props.data.map((item) => (
+            <div className="user5">
+              <li>
+                <div className="user">No. of Gallons: {item.gallons}</div>
+                <div className="user">Request date: {item.dated}</div>
+                <div className="user">
+                  Suggested Price: {item.suggestedPrice}
+                </div>
+                <div className="user">Suggested Price: {item.userAddress}</div>
+                <div className="user">Actual Price: {item.actualPrice}</div>
+              </li>
+            </div>
+          ))}
+        </ol>
       </div>
     );
   }
