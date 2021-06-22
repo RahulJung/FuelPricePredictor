@@ -6,7 +6,8 @@ FuelPricePredictor is a single page application that allows users to look up gas
 
 # HOME PAGE VIEW
 
-![](demo.gif)
+![fuel](https://user-images.githubusercontent.com/34432441/122864206-33541880-d2f2-11eb-9302-89deaee5cc0b.gif)
+
 
 ---
 
